@@ -1,0 +1,20 @@
+version: "3.9"
+services:
+  db:
+    image: postgres
+    volumes:
+      - judge-postgres:/var/lib/postgresql/data
+    environment:
+      POSTGRES_PASSWORD: password
+  api:
+    build: ./server
+    command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
+    volumes:
+      - ./server:/opt/app/judge-server
+      - bundler-gems:/usr/local/bundle/
+    ports:
+      - "3000:3000"
+
+volumes:
+  judge-postgres:
+  bundler-gems:
