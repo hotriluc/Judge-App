@@ -1,6 +1,7 @@
 #!/bin/bash
 set -e
 
+echo Environment: $RAILS_ENV
 bundle check || bundle install
 
 # Remove a potentially pre-existing server.pid for Rails.

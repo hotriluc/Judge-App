@@ -3,12 +3,14 @@ services:
   db:
     image: postgres
     volumes:
-      - judge_data:/var/lib/postgresql/data
+      - db_data:/var/lib/postgresql/data
     environment:
       POSTGRES_PASSWORD: password
+    command: postgres
     ports:
-      - "5432:5432"
+      - "5433:5432"
   api:
+    restart: always
     build: ./server
     command: bash -c "rm -f tmp/pids/server.pid && bundle exec rails s -p 3000 -b '0.0.0.0'"
     volumes:
@@ -17,7 +19,7 @@ services:
     ports:
       - "3000:3000"
     environment:
-      DATABASE_URL: postgres://postgres:password@db:5432/postgres
+      RAILS_ENV: development
 volumes:
-  judge_data:
+  db_data:
   cached_gems:
