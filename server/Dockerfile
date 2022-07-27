@@ -3,7 +3,7 @@ FROM ruby:3.1.2
 RUN apt-get update -qq && apt-get install -y nodejs postgresql-client
 
 # Default directory
-ENV APP_PATH /opt/app/judge-server
+ENV APP_PATH /var/app/judge-server
 RUN mkdir -p $APP_PATH
 WORKDIR $APP_PATH
 
@@ -19,9 +19,9 @@ COPY entrypoint.sh /usr/bin/
 RUN chmod +x /usr/bin/entrypoint.sh
 ENTRYPOINT ["entrypoint.sh"]
 
-COPY . $INSTALL_PATH
+COPY . $APP_PATH
 
-EXPOSE 3000
+EXPOSE $RAILS_PORT
 
 #CMD rails server -b 0.0.0.0
 CMD ["rails", "server", "-b", "0.0.0.0"]
