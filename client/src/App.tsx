@@ -1,13 +1,20 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
-import axios from 'axios';
 
-function App() {
-  axios
-    .get('/api/v1/users')
-    .then((res) => console.log(res))
-    .catch((err) => console.log(err));
+const App = () => {
+  // const [usersList, setUsersList] = useState(Array<IUser>);
+
+  // useEffect(() => {
+  //   axios.get('/api/v1/users').then((res: AxiosResponse) => {
+  //     setUsersList(res.data);
+  //   });
+
+  //   return () => {
+  //     console.log('kek');
+  //   };
+  // }, []);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -26,6 +33,6 @@ function App() {
       </header>
     </div>
   );
-}
+};
 
 export default App;
