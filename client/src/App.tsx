@@ -14,11 +14,7 @@ const App = () => {
   //   };
   // }, []);
 
-  return (
-    <div>
-      <header>hello</header>
-    </div>
-  );
+  return <div className=""></div>;
 };
 
 export default App;
