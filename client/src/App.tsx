@@ -1,8 +1,13 @@
 import React from 'react';
 import logo from './logo.svg';
 import './App.css';
+import axios from 'axios';
 
 function App() {
+  axios
+    .get('/api/v1/users')
+    .then((res) => console.log(res))
+    .catch((err) => console.log(err));
   return (
     <div className="App">
       <header className="App-header">
@@ -16,7 +21,7 @@ function App() {
           target="_blank"
           rel="noopener noreferrer"
         >
-          Hello world
+          Hello
         </a>
       </header>
     </div>
