@@ -1,5 +1,9 @@
 import React from 'react';
+import { Route, Routes } from 'react-router-dom';
 import './App.css';
+import Home from './pages/Home';
+import UserDetails from './pages/UserDetails';
+import Users from './pages/Users';
 
 const App = () => {
   // const [usersList, setUsersList] = useState(Array<IUser>);
@@ -15,8 +19,15 @@ const App = () => {
   // }, []);
 
   return (
-    <div>
-      <header>hello</header>
+    <div className="app">
+      <Routes>
+        <Route path="/" element={<Home />} />
+
+        {/* <Route path="users/:id" element={<UserDetails />} /> */}
+        <Route path="users" element={<Users />}>
+          <Route path=":id" element={<UserDetails />} />
+        </Route>
+      </Routes>
     </div>
   );
 };
