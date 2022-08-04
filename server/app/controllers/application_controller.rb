@@ -15,4 +15,16 @@ class ApplicationController < ActionController::API
     JWT.encode({ user_id: user.id }, jwt_key)
   end
 
+  def decoded_token
+    if auth_header
+      # header: { 'Authorization': 'Bearer <token>' }
+      token = auth_header.split(' ')[1]
+      begin
+        JWT.decode(token, jwt_key, true, algorithm: 'HS256')
+      rescue JWT::DecodeError
+        nil
+      end
+    end
+  end
+
 end
