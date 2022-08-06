@@ -1,15 +1,19 @@
 class UsersController < ApplicationController
   before_action :set_user, only: [:show, :destroy]
+  skip_before_action :authorized, only: [:create]
 
+  # GET /users
   def index
     @users = User.all
     render json: @users
   end
 
+  # GET /users/:id
   def show
     render json: @user
   end
 
+  # POST /users
   def create
     @user = User.new(user_params)
 
@@ -21,6 +25,7 @@ class UsersController < ApplicationController
     end
   end
 
+  # DELETE /users/:id
   def destroy
     User.destroy(@user.id)
     render json: { message: 'success' }
