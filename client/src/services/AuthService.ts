@@ -1,16 +1,15 @@
-import { Dispatch } from '@reduxjs/toolkit';
+import { AppDispatch } from '../store';
 import { authActions } from '../store/auth-store';
 // import axios from 'axios';
 
-export const login = (user: { email: string; password: string }) => {
-  async (dispatch: Dispatch) => {
-    console.log(user);
+export const createSession = (credentials: {
+  email: string;
+  password: string;
+}) => {
+  /*Create session thunk*/
+  return async (dispatch: AppDispatch) => {
+    console.log(credentials);
+    // do request to backend
     dispatch(authActions.login);
-    // const response = await axios.post('/api/v1/auth/login', {
-    //     auth: {
-    //         email: user.email,
-    //         password: user.password
-    //     }
-    // });
   };
 };

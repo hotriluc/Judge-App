@@ -1,12 +1,13 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../services/AuthService';
+import { useAppDispatch } from '../hooks/redux-hooks';
+import { createSession } from '../services/AuthService';
 
 const Login = () => {
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
+
   const clickLogInBtnHandler = () => {
     console.log('hello');
-    dispatch(login({ email: 'a', password: 'b' }));
+    dispatch(createSession({ email: 'abc', password: 'abc' }));
   };
 
   return (
