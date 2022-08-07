@@ -10,6 +10,6 @@ export const createSession = (credentials: {
   return async (dispatch: AppDispatch) => {
     console.log(credentials);
     // do request to backend
-    dispatch(authActions.login);
+    dispatch(authActions.login());
   };
 };

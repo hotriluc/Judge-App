@@ -1,18 +1,18 @@
 import React from 'react';
-import { useAppDispatch } from '../hooks/redux-hooks';
+import { useAppDispatch, useAppSelector } from '../hooks/app-hooks';
 import { createSession } from '../services/AuthService';
 
 const Login = () => {
   const dispatch = useAppDispatch();
-
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
   const clickLogInBtnHandler = () => {
-    console.log('hello');
     dispatch(createSession({ email: 'abc', password: 'abc' }));
   };
 
   return (
     <div>
-      <h1>log in page</h1>
+      <h1 className="text-3xl">log in page</h1>
+      <p>{isLoggedIn.toString()}</p>
       <form>
         <input type="email" />
         <input type="password" />
