@@ -30,10 +30,15 @@ const useStyle = createStyles(() => ({
 }));
 
 const AuthenticationForm = (): JSX.Element => {
+  // Get styles
+  const { classes } = useStyle();
   const [type, toggle] = useToggle(['login', 'register']);
+
   // Define the form
   const form = useForm({
     initialValues: {
+      first_name: '',
+      last_name: '',
       email: '',
       password: '',
     },
@@ -45,25 +50,40 @@ const AuthenticationForm = (): JSX.Element => {
     },
   });
 
-  // Get styles
-  const { classes } = useStyle();
+  const onAnchorClickHandler = () => {
+    toggle();
+    form.reset();
+  };
 
   return (
     <div className={classes.wrapper}>
       <Paper radius={0} className={classes.form}>
-        <Title order={2}>Welcome to Judge</Title>
+        <Title order={2}>
+          {type === 'register' ? 'Registration ' : 'Welcome to Judge'}
+        </Title>
         <form onSubmit={form.onSubmit((value) => console.log(value))}>
+          {type === 'register' && (
+            <>
+              <TextInput required label="Name" placeholder="Name" mt="md" />
+              <TextInput
+                required
+                label="Last name"
+                placeholder="Last name"
+                mt="md"
+              />
+            </>
+          )}
           <TextInput
             required
             label="Email"
             placeholder="expample@example.com"
             {...form.getInputProps('email')}
-            mt="xl"
+            mt="md"
           />
           <PasswordInput
             required
             label="Password"
-            placeholder="Your password"
+            placeholder="Password"
             {...form.getInputProps('password')}
             mt="md"
           />
@@ -77,8 +97,12 @@ const AuthenticationForm = (): JSX.Element => {
             {type === 'register'
               ? 'Already have an account? '
               : "Don't have an account? "}
-            <Anchor component="button" type="button" onClick={() => toggle()}>
-              {upperFirst(type)}
+            <Anchor
+              component="button"
+              type="button"
+              onClick={onAnchorClickHandler}
+            >
+              {type === 'register' ? 'Login' : 'Register'}
             </Anchor>
           </Text>
         </form>
