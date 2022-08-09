@@ -50,9 +50,15 @@ const AuthenticationForm = (): JSX.Element => {
     },
   });
 
+  type FormValues = typeof form.values;
+
   const onAnchorClickHandler = () => {
     toggle();
     form.reset();
+  };
+
+  const onSubmitHandler = (values: FormValues) => {
+    console.log(values);
   };
 
   return (
@@ -61,7 +67,7 @@ const AuthenticationForm = (): JSX.Element => {
         <Title order={2}>
           {type === 'register' ? 'Registration ' : 'Welcome to Judge'}
         </Title>
-        <form onSubmit={form.onSubmit((value) => console.log(value))}>
+        <form onSubmit={form.onSubmit((values) => onSubmitHandler(values))}>
           {type === 'register' && (
             <>
               <TextInput required label="Name" placeholder="Name" mt="md" />
