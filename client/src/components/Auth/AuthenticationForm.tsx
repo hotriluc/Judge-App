@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import {
   Paper,
   Title,
@@ -12,7 +12,10 @@ import {
 } from '@mantine/core';
 import { useForm } from '@mantine/form';
 import { upperFirst, useToggle } from '@mantine/hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks';
+import { createSession } from '../../services/AuthService';
 
+// Styling
 const useStyle = createStyles(() => ({
   wrapper: {
     backgroundSize: 'cover',
@@ -30,11 +33,12 @@ const useStyle = createStyles(() => ({
 }));
 
 const AuthenticationForm = (): JSX.Element => {
-  // Get styles
   const { classes } = useStyle();
   const [type, toggle] = useToggle(['login', 'register']);
+  const dispatch = useAppDispatch();
+  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
-  // Define the form
+  // Form declaration
   const form = useForm({
     initialValues: {
       first_name: '',
@@ -46,19 +50,26 @@ const AuthenticationForm = (): JSX.Element => {
     validateInputOnChange: true,
     validate: {
       email: (value) => (/^\S+@\S+$/.test(value) ? null : 'Invalid email'),
-      password: (value) => (value.length >= 6 ? null : 'Invalid password'),
+      // password: (value) => (value.length >= 6 ? null : 'Invalid password'),
     },
   });
-
   type FormValues = typeof form.values;
 
+  // Effects
+  useEffect(() => {
+    if (isLoggedIn) {
+      console.log('redirect to home page');
+    }
+  }, [isLoggedIn]);
+
+  // Handlers
   const onAnchorClickHandler = () => {
     toggle();
     form.reset();
   };
 
   const onSubmitHandler = (values: FormValues) => {
-    console.log(values);
+    dispatch(createSession(values));
   };
 
   return (
