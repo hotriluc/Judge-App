@@ -15,9 +15,12 @@ export const createSession = (credentials: {
       .post('/api/v1/auth/login', { user: { email, password } })
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data);
-          dispatch(authActions.login());
+          localStorage.setItem('token', res.data?.token);
+          dispatch(authActions.login(res.data));
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   };
 };
