@@ -24,3 +24,12 @@ export const createSession = (credentials: {
       });
   };
 };
+
+export const stopSession = () => {
+  return async (dispatch: AppDispatch) => {
+    // later implement refresh token
+    // post auth/revoke pass token
+    localStorage.removeItem('token');
+    dispatch(authActions.logout());
+  };
+};
