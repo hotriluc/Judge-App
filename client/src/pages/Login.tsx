@@ -1,23 +1,16 @@
 import React from 'react';
-import { useDispatch } from 'react-redux';
-import { login } from '../services/AuthService';
+import { Navigate } from 'react-router-dom';
+import AuthenticationForm from '../components/Auth/AuthenticationForm';
+
+import { useAppSelector } from '../hooks/app-hooks';
 
 const Login = () => {
-  const dispatch = useDispatch();
-  const clickLogInBtnHandler = () => {
-    console.log('hello');
-    dispatch(login({ email: 'a', password: 'b' }));
-  };
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
-  return (
-    <div>
-      <h1>log in page</h1>
-      <form>
-        <input type="email" />
-        <input type="password" />
-      </form>
-      <button onClick={clickLogInBtnHandler}>log in</button>
-    </div>
+  return isAuthenticated ? (
+    <Navigate to="/"></Navigate>
+  ) : (
+    <AuthenticationForm />
   );
 };
 

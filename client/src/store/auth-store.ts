@@ -1,15 +1,26 @@
-import { createSlice } from '@reduxjs/toolkit';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import IUser from '../interfaces/User';
+
+const initialState: { user: IUser; isAuthenticated: boolean } = {
+  user: {
+    id: '',
+    first_name: '',
+    last_name: '',
+    email: '',
+  },
+  isAuthenticated: false,
+};
 
 const AuthSlice = createSlice({
   name: 'auth',
-  initialState: { user: {}, isLoggedIn: false },
+  initialState: initialState,
   reducers: {
-    login(state) {
-      state.isLoggedIn = true;
-      //   localStorage.setItem()
+    login(state, action: PayloadAction<{ user: IUser }>) {
+      state.user = action.payload.user;
+      state.isAuthenticated = !!state.user;
     },
     logout(state) {
-      state.isLoggedIn = false;
+      state.isAuthenticated = false;
     },
   },
 });

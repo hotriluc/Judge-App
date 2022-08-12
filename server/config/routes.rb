@@ -8,6 +8,7 @@ Rails.application.routes.draw do
 
     scope '/auth' do
       post '/login', to: 'auth#create'
+      get '/auto_login', to: 'auth#show'
       post '/signup', to: 'users#create'
     end
   end
