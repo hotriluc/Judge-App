@@ -12,6 +12,15 @@ class AuthController < ApplicationController
     end
   end
 
+  def show
+    user = User.find_by(id: user_id)
+    if logged_in?
+      render json: user.as_json(except: [:password_digest])
+    else
+      render json: { error: 'No such user exists' }, status: 401
+    end
+  end
+
   def auth_params
     params.require(:user).permit(:email, :password)
   end
