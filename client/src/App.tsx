@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
+import { NavbarSimple } from './components/UI/NavigationBar';
 import { useAppDispatch } from './hooks/app-hooks';
 // import { useAppDispatch } from './hooks/app-hooks';
 import Home from './pages/Home';
@@ -23,6 +24,7 @@ const App = () => {
 
   return (
     <>
+      <NavbarSimple />
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
