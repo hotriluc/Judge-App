@@ -18,10 +18,9 @@ const App = () => {
   useEffect(() => {
     if (token) {
       dispatch(autoLogin(token));
-      console.log('auto login');
     }
   }, [token]);
-  console.log('i am here');
+
   return (
     <>
       <Routes>

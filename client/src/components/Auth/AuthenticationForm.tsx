@@ -13,7 +13,7 @@ import {
 import { useForm } from '@mantine/form';
 import { upperFirst, useToggle } from '@mantine/hooks';
 import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks';
-import { createSession } from '../../services/AuthService';
+import { createSession, signUp } from '../../services/AuthService';
 import { useNavigate } from 'react-router-dom';
 
 // Styling
@@ -72,7 +72,11 @@ const AuthenticationForm = (): JSX.Element => {
   };
 
   const onSubmitHandler = (values: FormValues) => {
-    dispatch(createSession(values));
+    if (type === 'login') {
+      dispatch(createSession(values));
+    } else if (type === 'register') {
+      dispatch(signUp(values));
+    }
   };
 
   return (
@@ -84,11 +88,18 @@ const AuthenticationForm = (): JSX.Element => {
         <form onSubmit={form.onSubmit((values) => onSubmitHandler(values))}>
           {type === 'register' && (
             <>
-              <TextInput required label="Name" placeholder="Name" mt="md" />
+              <TextInput
+                required
+                label="Name"
+                placeholder="Name"
+                {...form.getInputProps('first_name')}
+                mt="md"
+              />
               <TextInput
                 required
                 label="Last name"
                 placeholder="Last name"
+                {...form.getInputProps('last_name')}
                 mt="md"
               />
             </>

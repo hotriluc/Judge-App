@@ -1,9 +1,10 @@
 import axios from 'axios';
+import IUser from '../interfaces/User';
 import { AppDispatch } from '../store';
 import { authActions } from '../store/auth-store';
 
 /* Login
- * GET /api/v1/auth/auto_login
+ * GET /api/v1/auth/login
  * return {user, token}
  */
 export const createSession = (credentials: {
@@ -23,8 +24,17 @@ export const createSession = (credentials: {
         }
       })
       .catch((err) => {
-        console.log(err);
+        alert(err);
       });
+  };
+};
+
+export const stopSession = () => {
+  return async (dispatch: AppDispatch) => {
+    // later implement refresh token
+    // post auth/revoke pass token
+    localStorage.removeItem('token');
+    dispatch(authActions.logout());
   };
 };
 
@@ -45,15 +55,21 @@ export const autoLogin = (token: string) => {
           dispatch(authActions.login({ user: res.data }));
         }
       })
-      .catch((err) => console.log(err));
+      .catch((err) => alert(err));
   };
 };
 
-export const stopSession = () => {
-  return async (dispatch: AppDispatch) => {
-    // later implement refresh token
-    // post auth/revoke pass token
-    localStorage.removeItem('token');
-    dispatch(authActions.logout());
+/* User sign up
+ * POST /api/v1/auth/signup
+ * return {user, token}
+ */
+export const signUp = (user: Omit<IUser, 'id'>) => {
+  return async () => {
+    axios
+      .post('/api/v1/auth/signup', { user })
+      .then((res) => {
+        alert(res.status);
+      })
+      .catch((err) => console.log(err));
   };
 };
