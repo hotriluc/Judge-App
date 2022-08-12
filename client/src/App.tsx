@@ -1,7 +1,8 @@
+import { createStyles } from '@mantine/core';
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
 import { NavbarSimple } from './components/UI/NavigationBar';
-import { useAppDispatch } from './hooks/app-hooks';
+import { useAppDispatch, useAppSelector } from './hooks/app-hooks';
 // import { useAppDispatch } from './hooks/app-hooks';
 import Home from './pages/Home';
 import Login from './pages/Login';
@@ -10,9 +11,17 @@ import Users from './pages/Users';
 import { autoLogin } from './services/AuthService';
 import ProtectedRoutes from './utils/ProtectedRoutes';
 
+const useStyle = createStyles(() => ({
+  wrapper: {
+    display: 'flex',
+  },
+}));
+
 const App = () => {
+  const { classes } = useStyle();
   const token = localStorage.getItem('token');
   const dispatch = useAppDispatch();
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   // On first app run check if token exists
   // if yes then auto-login
@@ -23,8 +32,8 @@ const App = () => {
   }, [token]);
 
   return (
-    <>
-      <NavbarSimple />
+    <div className={classes.wrapper}>
+      {isAuthenticated && <NavbarSimple />}
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
@@ -35,7 +44,7 @@ const App = () => {
 
         <Route path="/login" element={<Login />} />
       </Routes>
-    </>
+    </div>
   );
 };
 
