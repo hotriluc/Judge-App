@@ -14,6 +14,7 @@ import { useForm } from '@mantine/form';
 import { upperFirst, useToggle } from '@mantine/hooks';
 import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks';
 import { createSession } from '../../services/AuthService';
+import { useNavigate } from 'react-router-dom';
 
 // Styling
 const useStyle = createStyles(() => ({
@@ -33,8 +34,11 @@ const useStyle = createStyles(() => ({
 }));
 
 const AuthenticationForm = (): JSX.Element => {
+  const navigate = useNavigate();
+
   const { classes } = useStyle();
   const [type, toggle] = useToggle(['login', 'register']);
+
   const dispatch = useAppDispatch();
   const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
 
@@ -58,7 +62,7 @@ const AuthenticationForm = (): JSX.Element => {
   // Effects
   useEffect(() => {
     if (isLoggedIn) {
-      console.log('redirect to home page');
+      navigate('/');
     }
   }, [isLoggedIn]);
 
