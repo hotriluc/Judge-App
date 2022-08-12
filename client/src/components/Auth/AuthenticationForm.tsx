@@ -35,10 +35,8 @@ const useStyle = createStyles(() => ({
 
 const AuthenticationForm = (): JSX.Element => {
   const navigate = useNavigate();
-
   const { classes } = useStyle();
   const [type, toggle] = useToggle(['login', 'register']);
-
   const dispatch = useAppDispatch();
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 

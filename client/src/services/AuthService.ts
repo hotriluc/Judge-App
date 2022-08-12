@@ -1,8 +1,11 @@
 import axios from 'axios';
 import { AppDispatch } from '../store';
 import { authActions } from '../store/auth-store';
-// import axios from 'axios';
 
+/* Login
+ * GET /api/v1/auth/auto_login
+ * return {user, token}
+ */
 export const createSession = (credentials: {
   email: string;
   password: string;
@@ -25,15 +28,10 @@ export const createSession = (credentials: {
   };
 };
 
-export const stopSession = () => {
-  return async (dispatch: AppDispatch) => {
-    // later implement refresh token
-    // post auth/revoke pass token
-    localStorage.removeItem('token');
-    dispatch(authActions.logout());
-  };
-};
-
+/* Auto-login if token stored in the browser
+ * GET /api/v1/auth/auto_login
+ * return user
+ */
 export const autoLogin = (token: string) => {
   const config = {
     headers: { Authorization: `Bearer ${token}` },
@@ -48,5 +46,14 @@ export const autoLogin = (token: string) => {
         }
       })
       .catch((err) => console.log(err));
+  };
+};
+
+export const stopSession = () => {
+  return async (dispatch: AppDispatch) => {
+    // later implement refresh token
+    // post auth/revoke pass token
+    localStorage.removeItem('token');
+    dispatch(authActions.logout());
   };
 };

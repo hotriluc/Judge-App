@@ -13,12 +13,12 @@ const App = () => {
   const token = localStorage.getItem('token');
   const dispatch = useAppDispatch();
 
+  // On first app run check if token exists
+  // if yes then auto-login
   useEffect(() => {
     if (token) {
       dispatch(autoLogin(token));
       console.log('auto login');
-    } else {
-      console.log('not authenticated');
     }
   }, []);
 
