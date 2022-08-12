@@ -33,3 +33,20 @@ export const stopSession = () => {
     dispatch(authActions.logout());
   };
 };
+
+export const autoLogin = (token: string) => {
+  const config = {
+    headers: { Authorization: `Bearer ${token}` },
+  };
+
+  return async (dispatch: AppDispatch) => {
+    axios
+      .get('/api/v1/auth/auto_login', config)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(authActions.login({ user: res.data }));
+        }
+      })
+      .catch((err) => console.log(err));
+  };
+};

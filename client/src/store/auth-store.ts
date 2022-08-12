@@ -3,14 +3,14 @@ import IUser from '../interfaces/User';
 
 const AuthSlice = createSlice({
   name: 'auth',
-  initialState: { user: {}, isLoggedIn: false },
+  initialState: { user: {}, isAuthenticated: false },
   reducers: {
     login(state, action: PayloadAction<{ user: IUser }>) {
-      state.isLoggedIn = true;
       state.user = action.payload.user;
+      state.isAuthenticated = !!state.user;
     },
     logout(state) {
-      state.isLoggedIn = false;
+      state.isAuthenticated = false;
     },
   },
 });

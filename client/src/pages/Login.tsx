@@ -1,17 +1,17 @@
 import React from 'react';
+import { Navigate } from 'react-router-dom';
 import AuthenticationForm from '../components/Auth/AuthenticationForm';
 
-// import { useAppDispatch, useAppSelector } from '../hooks/app-hooks';
-// import { createSession } from '../services/AuthService';
+import { useAppSelector } from '../hooks/app-hooks';
 
 const Login = () => {
-  // const dispatch = useAppDispatch();
-  // const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
-  // const clickLogInBtnHandler = () => {
-  //   dispatch(createSession({ email: 'abc', password: 'abc' }));
-  // };
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
-  return <AuthenticationForm />;
+  return isAuthenticated ? (
+    <Navigate to="/"></Navigate>
+  ) : (
+    <AuthenticationForm />
+  );
 };
 
 export default Login;

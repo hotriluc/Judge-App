@@ -40,7 +40,7 @@ const AuthenticationForm = (): JSX.Element => {
   const [type, toggle] = useToggle(['login', 'register']);
 
   const dispatch = useAppDispatch();
-  const isLoggedIn = useAppSelector((state) => state.auth.isLoggedIn);
+  const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
   // Form declaration
   const form = useForm({
@@ -61,10 +61,10 @@ const AuthenticationForm = (): JSX.Element => {
 
   // Effects
   useEffect(() => {
-    if (isLoggedIn) {
+    if (isAuthenticated) {
       navigate('/');
     }
-  }, [isLoggedIn]);
+  }, [isAuthenticated]);
 
   // Handlers
   const onAnchorClickHandler = () => {
