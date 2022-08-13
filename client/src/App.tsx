@@ -1,15 +1,17 @@
 import { createStyles } from '@mantine/core';
 import React, { useEffect } from 'react';
 import { Route, Routes } from 'react-router-dom';
-import { NavbarSimple } from './components/UI/NavigationBar';
+import ProtectedRoutes from './utils/ProtectedRoutes';
+
 import { useAppDispatch, useAppSelector } from './hooks/app-hooks';
-// import { useAppDispatch } from './hooks/app-hooks';
+import { autoLogin } from './services/AuthService';
+
+import NavigationBar from './components/UI/NavigationBar';
+
 import Home from './pages/Home';
 import Login from './pages/Login';
 import UserDetails from './pages/UserDetails';
 import Users from './pages/Users';
-import { autoLogin } from './services/AuthService';
-import ProtectedRoutes from './utils/ProtectedRoutes';
 
 const useStyle = createStyles(() => ({
   wrapper: {
@@ -33,7 +35,7 @@ const App = () => {
 
   return (
     <div className={classes.wrapper}>
-      {isAuthenticated && <NavbarSimple />}
+      {isAuthenticated && <NavigationBar />}
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
