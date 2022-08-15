@@ -10,7 +10,7 @@ import NavigationBar from './components/UI/NavigationBar';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
-import UserDetails from './pages/UserDetails';
+import User from './pages/User';
 import Users from './pages/Users';
 
 const useStyle = createStyles(() => ({
@@ -40,7 +40,7 @@ const App = () => {
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
           <Route path="users" element={<Users />}>
-            <Route path=":id" element={<UserDetails />} />
+            <Route path=":id" element={<User />} />
           </Route>
         </Route>
 
