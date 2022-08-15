@@ -9,7 +9,7 @@ import {
   createStyles,
 } from '@mantine/core';
 import { TablerIcon, IconChevronLeft, IconChevronRight } from '@tabler/icons';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const useStyles = createStyles((theme) => ({
   control: {
@@ -79,6 +79,7 @@ const LinksGroup = ({
   links,
 }: LinksGroupProps) => {
   const { classes, theme } = useStyles();
+  const navigate = useNavigate();
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft;
@@ -92,10 +93,20 @@ const LinksGroup = ({
     </Link>
   ));
 
+  const onButtonClickHandler = () => {
+    if (link && !links) {
+      navigate(link);
+    } else if (hasLinks) {
+      setOpened((o) => !o);
+    } else {
+      console.log('Something went wrong!');
+    }
+  };
+
   return (
     <>
       <UnstyledButton
-        onClick={() => setOpened((o) => !o)}
+        onClick={onButtonClickHandler}
         className={classes.control}
       >
         <Group position="apart" spacing={0}>
@@ -103,11 +114,7 @@ const LinksGroup = ({
             <ThemeIcon variant="light" size={30}>
               <Icon size={18} />
             </ThemeIcon>
-            <Box ml="md">
-              <Link className={classes.link} to={link || ''}>
-                {label}
-              </Link>
-            </Box>
+            <Box ml="md">{label}</Box>
           </Box>
           {hasLinks && (
             <ChevronIcon
