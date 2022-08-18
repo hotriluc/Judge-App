@@ -19,6 +19,7 @@ import { useNavigate } from 'react-router-dom';
 // Styling
 const useStyle = createStyles(() => ({
   wrapper: {
+    flexGrow: 1,
     backgroundSize: 'cover',
     backgroundImage:
       'url(https://images.unsplash.com/photo-1569396116180-210c182bedb8?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8&auto=format&fit=crop&w=2938&q=80)',

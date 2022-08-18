@@ -7,11 +7,7 @@ import { useAppSelector } from '../hooks/app-hooks';
 const Login = () => {
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
-  return isAuthenticated ? (
-    <Navigate to="/"></Navigate>
-  ) : (
-    <AuthenticationForm />
-  );
+  return isAuthenticated ? <Navigate to="/" /> : <AuthenticationForm />;
 };
 
 export default Login;
