@@ -83,6 +83,7 @@ const LinksGroup = ({
   const hasLinks = Array.isArray(links);
   const [opened, setOpened] = useState(initiallyOpened || false);
   const ChevronIcon = theme.dir === 'ltr' ? IconChevronRight : IconChevronLeft;
+
   const items = (hasLinks ? links : []).map((link) => (
     <Link
       className={`${classes.link} ${classes.subLink}`}

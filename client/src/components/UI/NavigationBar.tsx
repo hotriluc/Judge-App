@@ -1,21 +1,26 @@
 import React from 'react';
-// import { useState } from 'react';
 import { createStyles, Navbar, Group, Code, ScrollArea } from '@mantine/core';
-import { IconHome, IconSettings, IconBook, IconPencil } from '@tabler/icons';
-// import { Link, useNavigate } from 'react-router-dom';
-// import { useAppDispatch } from '../../hooks/app-hooks';
-// import { stopSession } from '../../services/AuthService';
-import UserButton from '../Users/UsertButton';
+import { IconHome, IconDashboard, IconBook, IconPencil } from '@tabler/icons';
 import LinksGroup from './NavBarLinksGroup';
+import NavigationMenu from './NavigationMenu';
 
-const mockdata = [
+// dashboard only for admin
+const linksData = [
   { label: 'Home', icon: IconHome, link: '/' },
+  {
+    label: 'Dashboard',
+    icon: IconDashboard,
+    links: [
+      { label: 'Students', link: '/students' },
+      { label: 'Courses', link: '/' },
+    ],
+  },
   {
     label: 'Courses',
     icon: IconBook,
     links: [
-      { label: 'Enrolled', link: '/courses' },
-      { label: 'Real time', link: '/' },
+      { label: 'New courses', link: '/courses' },
+      { label: 'Enrolled courses', link: '/' },
     ],
   },
   {
@@ -26,7 +31,6 @@ const mockdata = [
       { label: 'Drafts', link: '/solutions-drafts' },
     ],
   },
-  { label: 'Settings', icon: IconSettings, link: '/settings' },
 ];
 
 const useStyles = createStyles((theme) => ({
@@ -68,7 +72,7 @@ const useStyles = createStyles((theme) => ({
 
 const NavigationBar = () => {
   const { classes } = useStyles();
-  const links = mockdata.map((item) => (
+  const links = linksData.map((item) => (
     <LinksGroup {...item} key={item.label} />
   ));
 
@@ -81,7 +85,7 @@ const NavigationBar = () => {
     >
       <Navbar.Section className={classes.header}>
         <Group position="apart">
-          <Code sx={{ fontWeight: 700 }}>v3.1.2</Code>
+          <Code sx={{ fontWeight: 700 }}>v0.0.1</Code>
         </Group>
       </Navbar.Section>
 
@@ -90,11 +94,7 @@ const NavigationBar = () => {
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
-        <UserButton
-        // image="https://images.unsplash.com/photo-1508214751196-bcfd4ca60f91?ixid=MXwxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHw%3D&ixlib=rb-1.2.1&auto=format&fit=crop&w=255&q=80"
-        // name="Ann Nullpointer"
-        // email="anullpointer@yahoo.com"
-        />
+        <NavigationMenu />
       </Navbar.Section>
     </Navbar>
   );
