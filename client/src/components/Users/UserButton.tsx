@@ -32,6 +32,7 @@ const useStyle = createStyles((theme) => ({
   },
 }));
 
+//To use the component as target in menu forwardRef is needed
 const UserButton = forwardRef<HTMLButtonElement, UserButtonProps>(
   ({ image, name, email, icon, ...others }: UserButtonProps, ref) => {
     const { classes } = useStyle();

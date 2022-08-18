@@ -4,6 +4,7 @@ import { IconHome, IconDashboard, IconBook, IconPencil } from '@tabler/icons';
 import LinksGroup from './NavBarLinksGroup';
 import NavigationMenu from './NavigationMenu';
 
+// Navbar links
 // dashboard only for admin
 const linksData = [
   { label: 'Home', icon: IconHome, link: '/' },

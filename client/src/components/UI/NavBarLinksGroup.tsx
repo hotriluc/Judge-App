@@ -94,6 +94,8 @@ const LinksGroup = ({
     </Link>
   ));
 
+  // Programmatically navigate if {link} existed
+  // if more then one link then set open
   const onButtonClickHandler = () => {
     if (link && !links) {
       navigate(link);
