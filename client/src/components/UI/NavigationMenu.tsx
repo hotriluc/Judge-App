@@ -7,9 +7,20 @@ import {
   IconLogout,
 } from '@tabler/icons';
 import React from 'react';
+import { useNavigate } from 'react-router-dom';
+import { useAppDispatch } from '../../hooks/app-hooks';
+import { stopSession } from '../../services/AuthService';
 import UserButton from '../Users/UserButton';
 
 const NavigationMenu = () => {
+  const dispatch = useAppDispatch();
+  const navigate = useNavigate();
+
+  const onClickLogoutHandler = () => {
+    dispatch(stopSession());
+    navigate('/login');
+  };
+
   return (
     <Menu shadow="md" width={270}>
       <Menu.Target>
@@ -35,7 +46,11 @@ const NavigationMenu = () => {
         <Menu.Item icon={<IconArrowsLeftRight size={14} />}>
           Change account
         </Menu.Item>
-        <Menu.Item color="red" icon={<IconLogout size={14} />}>
+        <Menu.Item
+          onClick={onClickLogoutHandler}
+          color="red"
+          icon={<IconLogout size={14} />}
+        >
           Log out
         </Menu.Item>
       </Menu.Dropdown>
