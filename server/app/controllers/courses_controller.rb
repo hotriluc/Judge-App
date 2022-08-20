@@ -3,7 +3,7 @@ class CoursesController < ApplicationController
 
   # GET /courses
   def index
-    @courses = current_user.courses
+    @courses = Course.all
     render json: @courses
   end
 
