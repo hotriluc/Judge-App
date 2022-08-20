@@ -5,6 +5,7 @@ Rails.application.routes.draw do
   # root "articles#index"
   scope 'api/v1' do
     resources :users
+    resources :courses
 
     scope '/auth' do
       post '/login', to: 'auth#create'

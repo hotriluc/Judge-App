@@ -10,10 +10,19 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2022_08_02_170744) do
+ActiveRecord::Schema[7.0].define(version: 2022_08_18_183312) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "pgcrypto"
   enable_extension "plpgsql"
+
+  create_table "courses", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
+    t.string "title"
+    t.string "description"
+    t.uuid "owner_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["owner_id"], name: "index_courses_on_owner_id"
+  end
 
   create_table "users", id: :uuid, default: -> { "gen_random_uuid()" }, force: :cascade do |t|
     t.string "first_name"
