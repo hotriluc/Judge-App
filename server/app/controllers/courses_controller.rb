@@ -12,6 +12,17 @@ class CoursesController < ApplicationController
     render json: @course
   end
 
+  # POST /courses
+  def create
+    @course = Course.new(course_params)
+
+    if @course.save
+      render json: @course, status: 200
+    else
+      render json: { error: 'Course could not be created. Please, try again later.' }, status: 400
+    end
+  end
+
   # PATCH /course/:id
   def update
     @course.update(course_params)
