@@ -13,6 +13,8 @@ import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
 import UserDetails from './pages/UserDetails';
+import Courses from './pages/Courses';
+import CourseDetails from './pages/CourseDetails';
 
 const useStyle = createStyles(() => ({
   wrapper: {
@@ -44,6 +46,9 @@ const App = () => {
           <Route path="/dashboard" element={<Dashboard />}>
             <Route path="students" element={<Users />}>
               <Route path=":id" element={<UserDetails />} />
+            </Route>
+            <Route path="courses" element={<Courses />}>
+              <Route path=":id" element={<CourseDetails />} />
             </Route>
           </Route>
         </Route>
