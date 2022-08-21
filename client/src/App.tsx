@@ -24,12 +24,15 @@ const useStyle = createStyles(() => ({
 
 const App = () => {
   const { classes } = useStyle();
-  const token = localStorage.getItem('token');
   const dispatch = useAppDispatch();
+
+  // We assume if token exists in localStorage then user is authenticated
+  const token = localStorage.getItem('token');
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
-  // On first app run check if token exists
-  // if yes then auto-login
+  // On first app run check if token is valid
+  // if true then login
+  // otherwise logout
   useEffect(() => {
     if (token) {
       dispatch(autoLogin(token));

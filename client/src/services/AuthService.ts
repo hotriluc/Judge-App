@@ -55,7 +55,11 @@ export const autoLogin = (token: string) => {
           dispatch(authActions.login({ user: res.data }));
         }
       })
-      .catch((err) => alert(err));
+      .catch((err) => {
+        alert(err);
+        localStorage.removeItem('token');
+        dispatch(authActions.logout());
+      });
   };
 };
 

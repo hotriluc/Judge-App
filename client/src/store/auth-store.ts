@@ -8,7 +8,7 @@ const initialState: { user: IUser; isAuthenticated: boolean } = {
     last_name: '',
     email: '',
   },
-  isAuthenticated: false,
+  isAuthenticated: !!localStorage.getItem('token'),
 };
 
 const AuthSlice = createSlice({
