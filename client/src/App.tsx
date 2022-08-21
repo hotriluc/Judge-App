@@ -10,8 +10,9 @@ import NavigationBar from './components/UI/NavigationBar';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
-import User from './pages/User';
-import Users from './pages/Users';
+import Dashboard from './pages/Dashboard';
+import Students from './pages/Students';
+import StudentDetails from './pages/StudentDetails';
 
 const useStyle = createStyles(() => ({
   wrapper: {
@@ -39,8 +40,11 @@ const App = () => {
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
-          <Route path="users" element={<Users />}>
-            <Route path=":id" element={<User />} />
+
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="students" element={<Students />}>
+              <Route path=":id" element={<StudentDetails />} />
+            </Route>
           </Route>
         </Route>
 

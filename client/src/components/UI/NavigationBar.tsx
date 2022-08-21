@@ -12,24 +12,21 @@ const linksData = [
     label: 'Dashboard',
     icon: IconDashboard,
     links: [
-      { label: 'Students', link: '/students' },
-      { label: 'Courses', link: '/' },
+      { label: 'Students', link: 'dashboard/students' },
+      { label: 'Courses', link: 'dashboard/courses' },
     ],
   },
   {
-    label: 'Courses',
+    label: 'Learning',
     icon: IconBook,
-    links: [
-      { label: 'New courses', link: '/courses' },
-      { label: 'Enrolled courses', link: '/' },
-    ],
+    links: [{ label: 'Enrolled courses', link: '/my-courses/enrolled' }],
   },
   {
     label: 'Solutions',
     icon: IconPencil,
     links: [
       { label: 'Applied solutions', link: '/solutions' },
-      { label: 'Drafts', link: '/solutions-drafts' },
+      { label: 'Drafts', link: '/solutions/drafts' },
     ],
   },
 ];
