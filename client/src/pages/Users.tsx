@@ -1,7 +1,7 @@
 import React from 'react';
 import { Outlet, Link } from 'react-router-dom';
 
-const Students = () => {
+const Users = () => {
   const userList = [
     { id: '1', name: 'user 1' },
     { id: '2', name: 'user 2' },
@@ -25,4 +25,4 @@ const Students = () => {
   );
 };
 
-export default Students;
+export default Users;

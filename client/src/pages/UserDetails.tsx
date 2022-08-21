@@ -1,7 +1,7 @@
 import React from 'react';
 import { useParams } from 'react-router-dom';
 
-const StudentDetails = () => {
+const UserDetails = () => {
   const { id } = useParams();
   return (
     <div>
@@ -10,4 +10,4 @@ const StudentDetails = () => {
   );
 };
 
-export default StudentDetails;
+export default UserDetails;

@@ -11,8 +11,8 @@ import NavigationBar from './components/UI/NavigationBar';
 import Home from './pages/Home';
 import Login from './pages/Login';
 import Dashboard from './pages/Dashboard';
-import Students from './pages/Students';
-import StudentDetails from './pages/StudentDetails';
+import Users from './pages/Users';
+import UserDetails from './pages/UserDetails';
 
 const useStyle = createStyles(() => ({
   wrapper: {
@@ -42,8 +42,8 @@ const App = () => {
           <Route path="/" element={<Home />} />
 
           <Route path="/dashboard" element={<Dashboard />}>
-            <Route path="students" element={<Students />}>
-              <Route path=":id" element={<StudentDetails />} />
+            <Route path="students" element={<Users />}>
+              <Route path=":id" element={<UserDetails />} />
             </Route>
           </Route>
         </Route>
