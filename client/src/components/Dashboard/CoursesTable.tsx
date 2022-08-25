@@ -12,7 +12,6 @@ const courseList = [
 
 const CoursesTable = () => {
   const dispatch = useAppDispatch();
-  const token = localStorage.getItem('token');
   const [newPage, setNewPage] = useState(0);
 
   //create tableSlice that will handle nextPage and lastPage
@@ -20,9 +19,7 @@ const CoursesTable = () => {
   // on open new component courses or else that use table
   // reset pagination and etc.
   useEffect(() => {
-    if (token) {
-      dispatch(getCourses(token));
-    }
+    dispatch(getCourses());
   }, [newPage]);
 
   const onClickNextPageHandler = () => {

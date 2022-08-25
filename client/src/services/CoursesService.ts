@@ -1,14 +1,17 @@
 import axios from 'axios';
+import { authHeader } from '../helpers/auth-helper';
 // import { AppDispatch } from '../store';
+
+const config = {
+  headers: {},
+};
 
 /* Auto-login if token stored in the browser
  * GET /api/v1/courses
  * return user (owner) courses
  */
-export const getCourses = (token: string) => {
-  const config = {
-    headers: { Authorization: `Bearer ${token}` },
-  };
+export const getCourses = () => {
+  config.headers = { ...authHeader() };
 
   return async () => {
     axios
