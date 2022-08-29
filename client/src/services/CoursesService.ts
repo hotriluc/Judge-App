@@ -18,7 +18,7 @@ export const getCourses = () => {
       .get('/api/v1/courses', config)
       .then((res) => {
         if (res.status === 200) {
-          console.log(res.data);
+          // console.log(res.data);
         }
       })
       .catch((err) => alert(err));

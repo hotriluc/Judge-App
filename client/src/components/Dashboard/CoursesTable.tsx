@@ -1,13 +1,17 @@
-import { Table } from '@mantine/core';
 import React, { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import { useAppDispatch } from '../../hooks/app-hooks';
 import { getCourses } from '../../services/CoursesService';
+import DataTable, { ColumnDefinitionType } from '../UI/DataTable';
 // import { Link } from 'react-router-dom';
 
-const courseList = [
-  { id: '1', name: 'course 1' },
-  { id: '2', name: 'course 2' },
+interface Course {
+  title: string;
+  description: string;
+}
+
+const mockData: Array<Course> = [{ title: 'Luc', description: 'nice course' }];
+const columns: ColumnDefinitionType<Course, keyof Course>[] = [
+  { key: 'title', header: 'Name' },
 ];
 
 const CoursesTable = () => {
@@ -30,31 +34,11 @@ const CoursesTable = () => {
     setNewPage((newPage: number) => newPage - 1);
   };
 
-  const rows = courseList.map((element) => (
-    <tr key={element.name}>
-      <td>{element.id}</td>
-      <td>
-        <Link to={element.id}>{element.name}</Link>
-      </td>
-    </tr>
-  ));
-
   return (
     <div>
       <button onClick={onClickPrevPageHandler}>Prev</button>
       <button onClick={onClickNextPageHandler}>Next</button>
-
-      <Table>
-        <thead>
-          <tr>
-            <th>id</th>
-            <th>Title</th>
-            <th>User count</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>{rows}</tbody>
-      </Table>
+      <DataTable data={mockData} columns={columns} />
     </div>
   );
 };
