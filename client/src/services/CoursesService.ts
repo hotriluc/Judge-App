@@ -1,5 +1,7 @@
 import axios from 'axios';
 import { authHeader } from '../helpers/auth-helper';
+import { AppDispatch } from '../store';
+import { courseActions } from '../store/course-store';
 // import { AppDispatch } from '../store';
 
 const config = {
@@ -13,12 +15,12 @@ const config = {
 export const getCourses = () => {
   config.headers = { ...authHeader() };
 
-  return async () => {
+  return async (dispatch: AppDispatch) => {
     axios
       .get('/api/v1/courses', config)
       .then((res) => {
         if (res.status === 200) {
-          // console.log(res.data);
+          dispatch(courseActions.setOwnedCourses(res.data));
         }
       })
       .catch((err) => alert(err));

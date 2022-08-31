@@ -1,15 +1,19 @@
 import { createSlice } from '@reduxjs/toolkit';
+import ICourse from '../interfaces/Course';
+
+const initialState: { ownedCourses: Array<ICourse> } = {
+  ownedCourses: [],
+};
 
 const CourseSlice = createSlice({
   name: 'course',
-  initialState: {
-    ownedCourses: [],
-  },
+  initialState: initialState,
   reducers: {
     setOwnedCourses: (state, action) => {
-      console.log(action.payload);
+      state.ownedCourses = action.payload;
     },
   },
 });
 
+export const courseActions = CourseSlice.actions;
 export default CourseSlice.reducer;

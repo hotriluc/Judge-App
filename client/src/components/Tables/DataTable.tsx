@@ -1,6 +1,10 @@
 import React from 'react';
 import { Table } from '@mantine/core';
 
+interface MinimumData {
+  id: string;
+}
+
 // Define structure for column object
 // K are keys defined in T
 // i.e you can not pass random keys only ones that exist in T Object
@@ -13,25 +17,24 @@ export type ColumnDefinitionType<T, K extends keyof T> = {
 // Define structure for component's props
 // data - array of T (e.g Course, User, etc.)
 // columns - array of columns (it depends on data we passed)
-interface DataTableProps<T, K extends keyof T> {
+interface DataTableProps<T extends MinimumData, K extends keyof T> {
   data: Array<T>;
   columns: Array<ColumnDefinitionType<T, K>>;
 }
 
-const DataTable = <T, K extends keyof T>({
+const DataTable = <T extends MinimumData, K extends keyof T>({
   data,
   columns,
 }: DataTableProps<T, K>) => {
-  // prepare rows
+  // prepare rows and columns
   const rows = data.map((row, index) => (
     <tr key={`row-${index}`}>
       {columns.map((col, index) => (
-        <td key={`col-${index}`}>{`${row[col.key]}`}</td>
+        <td key={`col-${index}`}>{`${row[col.key] ?? '-'}`}</td>
       ))}
+      <td>{row.id}</td>
     </tr>
   ));
-
-  //prepare columns
   const cols = columns.map((col, index) => (
     <th key={`header-${index}`}>{col.header}</th>
   ));
