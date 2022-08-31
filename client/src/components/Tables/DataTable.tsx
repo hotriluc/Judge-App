@@ -22,6 +22,7 @@ const DataTable = <T, K extends keyof T>({
   data,
   columns,
 }: DataTableProps<T, K>) => {
+  // prepare rows
   const rows = data.map((row, index) => (
     <tr key={`row-${index}`}>
       {columns.map((col, index) => (
@@ -29,6 +30,8 @@ const DataTable = <T, K extends keyof T>({
       ))}
     </tr>
   ));
+
+  //prepare columns
   const cols = columns.map((col, index) => (
     <th key={`header-${index}`}>{col.header}</th>
   ));

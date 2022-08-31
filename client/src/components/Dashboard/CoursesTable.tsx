@@ -1,17 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useAppDispatch } from '../../hooks/app-hooks';
+import ICourse from '../../interfaces/Course';
 import { getCourses } from '../../services/CoursesService';
-import DataTable, { ColumnDefinitionType } from '../UI/DataTable';
+import DataTable, { ColumnDefinitionType } from '../Tables/DataTable';
 // import { Link } from 'react-router-dom';
 
-interface Course {
-  title: string;
-  description: string;
-}
+const mockData: Array<ICourse> = [
+  { title: 'Luc', description: 'nice course' },
+  { title: 'Luc2', description: 'nice course' },
+  { title: 'Luc3', description: 'nice course' },
+  { title: 'Luc4', description: 'nice course' },
+];
 
-const mockData: Array<Course> = [{ title: 'Luc', description: 'nice course' }];
-const columns: ColumnDefinitionType<Course, keyof Course>[] = [
+const columns: ColumnDefinitionType<ICourse, keyof ICourse>[] = [
   { key: 'title', header: 'Name' },
+  { key: 'description', header: 'Description' },
 ];
 
 const CoursesTable = () => {
