@@ -10,8 +10,11 @@ import NavigationBar from './components/UI/NavigationBar';
 
 import Home from './pages/Home';
 import Login from './pages/Login';
-import User from './pages/User';
+import Dashboard from './pages/Dashboard';
 import Users from './pages/Users';
+import UserDetails from './pages/UserDetails';
+import Courses from './pages/Courses';
+import CourseDetails from './pages/CourseDetails';
 
 const useStyle = createStyles(() => ({
   wrapper: {
@@ -21,12 +24,15 @@ const useStyle = createStyles(() => ({
 
 const App = () => {
   const { classes } = useStyle();
-  const token = localStorage.getItem('token');
   const dispatch = useAppDispatch();
+
+  // We assume if token exists in localStorage then user is authenticated
+  const token = localStorage.getItem('token');
   const isAuthenticated = useAppSelector((state) => state.auth.isAuthenticated);
 
-  // On first app run check if token exists
-  // if yes then auto-login
+  // On first app run check if token is valid
+  // if true then login
+  // otherwise logout
   useEffect(() => {
     if (token) {
       dispatch(autoLogin(token));
@@ -39,8 +45,14 @@ const App = () => {
       <Routes>
         <Route element={<ProtectedRoutes />}>
           <Route path="/" element={<Home />} />
-          <Route path="users" element={<Users />}>
-            <Route path=":id" element={<User />} />
+
+          <Route path="/dashboard" element={<Dashboard />}>
+            <Route path="students" element={<Users />}>
+              <Route path=":id" element={<UserDetails />} />
+            </Route>
+            <Route path="courses" element={<Courses />}>
+              <Route path=":id" element={<CourseDetails />} />
+            </Route>
           </Route>
         </Route>
 

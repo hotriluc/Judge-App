@@ -1,9 +1,9 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show update]
+  before_action :set_course, only: %i[show update destroy]
 
   # GET /courses
   def index
-    @courses = Course.all
+    @courses = current_user.courses
     render json: @courses
   end
 
