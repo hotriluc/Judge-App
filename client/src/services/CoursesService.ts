@@ -26,3 +26,18 @@ export const getCourses = () => {
       .catch((err) => alert(err));
   };
 };
+
+export const deleteCourse = (id: string) => {
+  config.headers = { ...authHeader() };
+
+  return async (dispatch: AppDispatch) => {
+    axios
+      .delete(`/api/v1/courses/${id}`, config)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(courseActions.deleteCourse(id));
+        }
+      })
+      .catch((err) => alert(err));
+  };
+};
