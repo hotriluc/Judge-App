@@ -1,17 +1,18 @@
 import React, { useEffect } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks';
 import ICourse from '../../interfaces/Course';
 import { deleteCourse, getCourses } from '../../services/CoursesService';
 import DataTable, { ColumnDefinitionType } from '../Table/DataTable';
-// import { Link } from 'react-router-dom';
 
 const columns: ColumnDefinitionType<ICourse, keyof ICourse>[] = [
-  { key: 'title', header: 'Name' },
+  { key: 'title', header: 'Title' },
   { key: 'description', header: 'Description' },
 ];
 
 const CoursesTable = () => {
   const dispatch = useAppDispatch();
+  const navigate = useNavigate();
   // const [newPage, setNewPage] = useState(0);
   const courses = useAppSelector((state) => state.course.ownedCourses);
   const isChanged = useAppSelector((state) => state.course.isChanged);
@@ -24,13 +25,17 @@ const CoursesTable = () => {
   // On state changes refetch
   useEffect(() => {
     if (isChanged) {
-      console.log(isChanged);
       dispatch(getCourses());
     }
   }, [isChanged]);
 
   const removeCourse = (id: string) => {
     dispatch(deleteCourse(id));
+  };
+
+  // passing view function like this make it more flexible to do something custom on UI
+  const viewCourse = (id: string) => {
+    navigate(id);
   };
 
   return (
@@ -42,6 +47,7 @@ const CoursesTable = () => {
         columns={columns}
         displayActions={true}
         removeFn={removeCourse}
+        viewFn={viewCourse}
       />
     </div>
   );

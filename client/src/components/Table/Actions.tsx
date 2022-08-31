@@ -8,18 +8,21 @@ const useStyles = createStyles(() => ({
   },
 }));
 
-const Actions = (props: {
+interface IActions {
   id: string;
-  removeFn(id: string): void;
-}): JSX.Element => {
+  viewFn: (id: string) => void;
+  removeFn: (id: string) => void;
+}
+
+const Actions = ({ id, viewFn, removeFn }: IActions): JSX.Element => {
   const { classes } = useStyles();
 
   const onClickViewButton = () => {
-    console.log(props.id);
+    viewFn(id);
   };
 
   const onClickRemoveButton = () => {
-    props.removeFn(props.id);
+    removeFn(id);
   };
 
   return (

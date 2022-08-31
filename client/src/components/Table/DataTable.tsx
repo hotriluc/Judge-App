@@ -22,6 +22,7 @@ interface DataTableProps<T extends MinimumData, K extends keyof T> {
   data: Array<T>;
   columns: Array<ColumnDefinitionType<T, K>>;
   displayActions?: boolean;
+  viewFn: (id: string) => void;
   removeFn: (id: string) => void;
 }
 
@@ -35,6 +36,7 @@ const DataTable = <T extends MinimumData, K extends keyof T>({
   data,
   columns,
   displayActions,
+  viewFn,
   removeFn,
 }: DataTableProps<T, K>) => {
   const { classes } = useStyles();
@@ -47,7 +49,7 @@ const DataTable = <T extends MinimumData, K extends keyof T>({
       ))}
       {displayActions && (
         <td>
-          <Actions id={row.id} removeFn={removeFn} />
+          <Actions id={row.id} viewFn={viewFn} removeFn={removeFn} />
         </td>
       )}
     </tr>

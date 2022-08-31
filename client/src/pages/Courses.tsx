@@ -5,9 +5,11 @@ import CoursesTable from '../components/Dashboard/CoursesTable';
 const Courses = () => {
   return (
     <div>
-      <h1>this is Course page</h1>
-      <CoursesTable />
-      <Outlet />
+      <h1>My courses</h1>
+      <div>
+        <CoursesTable />
+        <Outlet />
+      </div>
     </div>
   );
 };
