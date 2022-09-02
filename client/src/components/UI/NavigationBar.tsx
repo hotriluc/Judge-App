@@ -1,35 +1,9 @@
 import React from 'react';
 import { createStyles, Navbar, Group, Code, ScrollArea } from '@mantine/core';
-import { IconHome, IconDashboard, IconBook, IconPencil } from '@tabler/icons';
-import LinksGroup from './NavBarLinksGroup';
 import NavigationMenu from './NavigationMenu';
-
-// Navbar links
-// dashboard only for admin
-const linksData = [
-  { label: 'Home', icon: IconHome, link: '/' },
-  {
-    label: 'Dashboard',
-    icon: IconDashboard,
-    links: [
-      { label: 'Students', link: 'dashboard/students' },
-      { label: 'Courses', link: 'dashboard/courses' },
-    ],
-  },
-  {
-    label: 'Learning',
-    icon: IconBook,
-    links: [{ label: 'Enrolled courses', link: '/my-courses/enrolled' }],
-  },
-  {
-    label: 'Solutions',
-    icon: IconPencil,
-    links: [
-      { label: 'Applied solutions', link: '/solutions' },
-      { label: 'Drafts', link: '/solutions/drafts' },
-    ],
-  },
-];
+import { ILink } from '../../interfaces/Link';
+import NavLinksGroup from './NavLinksGroup';
+import { IconBook, IconDashboard, IconHome, IconPencil } from '@tabler/icons';
 
 const useStyles = createStyles((theme) => ({
   navbar: {
@@ -68,10 +42,30 @@ const useStyles = createStyles((theme) => ({
   },
 }));
 
+const links: Array<ILink> = [
+  { icon: IconHome, label: 'Home', path: '/' },
+  { icon: IconDashboard, label: 'Dashboard', path: '/dashboard' },
+  {
+    icon: IconBook,
+    label: 'Courses',
+    path: '/courses',
+    links: [{ label: 'Enrolled', path: '/enrolled' }],
+  },
+  {
+    icon: IconPencil,
+    label: 'Solutions',
+    path: '/solutions',
+    links: [
+      { label: 'Applied', path: '/applied' },
+      { label: 'Drafts', path: '/drafts' },
+    ],
+  },
+];
+
 const NavigationBar = () => {
   const { classes } = useStyles();
-  const links = linksData.map((item) => (
-    <LinksGroup {...item} key={item.label} />
+  const linksGroup = links.map((item) => (
+    <NavLinksGroup {...item} key={item.label} />
   ));
 
   return (
@@ -88,7 +82,7 @@ const NavigationBar = () => {
       </Navbar.Section>
 
       <Navbar.Section grow className={classes.links} component={ScrollArea}>
-        <div className={classes.linksInner}>{links}</div>
+        <div className={classes.linksInner}>{linksGroup}</div>
       </Navbar.Section>
 
       <Navbar.Section className={classes.footer}>
