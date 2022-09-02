@@ -50,9 +50,8 @@ const App = () => {
             <Route path="students" element={<Users />}>
               <Route path=":id" element={<UserDetails />} />
             </Route>
-            <Route path="courses" element={<Courses />}>
-              <Route path=":id" element={<CourseDetails />} />
-            </Route>
+            <Route path="courses" element={<Courses />}></Route>
+            <Route path="courses/:id" element={<CourseDetails />} />
           </Route>
         </Route>
 
