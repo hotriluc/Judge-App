@@ -16,6 +16,7 @@ const useStyle = createStyles(() => ({
 const NavLinksGroup = ({ icon: Icon, path, label, links }: ILink) => {
   const location = useLocation();
   const { classes } = useStyle();
+
   const subLinks = links?.map((subLink) => (
     <NavLink
       key={subLink.label}
@@ -27,6 +28,21 @@ const NavLinksGroup = ({ icon: Icon, path, label, links }: ILink) => {
     ></NavLink>
   ));
 
+  // Set active link depends on location
+  // Split the location path and filter it for non-empty strings
+  // the first element will be root
+  // e.g /dashboard/courses => ['dashboard', 'courses']
+  // if location path has arr[0] ('dashboard') then links is active
+  // otherwise inactive
+  const isActive = (): boolean => {
+    const locationPath = location.pathname;
+    const splittedPath = locationPath.split('/').filter((el) => el !== '');
+    return (
+      locationPath === path ||
+      (splittedPath.length > 0 && path.includes(splittedPath[0]))
+    );
+  };
+
   //for better aligning
   //1px icon-size => 1.6px children offset
   //e.g 20px icon => 32px offset
@@ -36,7 +52,7 @@ const NavLinksGroup = ({ icon: Icon, path, label, links }: ILink) => {
       label={label}
       component={Link}
       to={path}
-      active={location.pathname === path}
+      active={isActive()}
       icon={<Icon size={20} stroke={1.5} />}
       childrenOffset={32}
       color="red"
