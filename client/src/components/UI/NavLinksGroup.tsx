@@ -24,7 +24,6 @@ const NavLinksGroup = ({ icon: Icon, path, label, links }: ILink) => {
       component={Link}
       to={`${path}${subLink.path}`}
       active={location.pathname === `${path}${subLink.path}`}
-      color="red"
     ></NavLink>
   ));
 
@@ -39,7 +38,7 @@ const NavLinksGroup = ({ icon: Icon, path, label, links }: ILink) => {
     const splittedPath = locationPath.split('/').filter((el) => el !== '');
     return (
       locationPath === path ||
-      (splittedPath.length > 0 && path.includes(splittedPath[0]))
+      (splittedPath.length > 0 && path.includes(splittedPath[0]) && !links)
     );
   };
 
@@ -55,7 +54,6 @@ const NavLinksGroup = ({ icon: Icon, path, label, links }: ILink) => {
       active={isActive()}
       icon={<Icon size={20} stroke={1.5} />}
       childrenOffset={32}
-      color="red"
       classNames={{
         root: classes.link,
         label: classes.label,
