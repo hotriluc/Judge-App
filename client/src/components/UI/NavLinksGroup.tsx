@@ -31,7 +31,7 @@ const NavLinksGroup = ({ icon: Icon, path, label, links }: ILink) => {
   // Split the location path and filter it for non-empty strings
   // the first element will be root
   // e.g /dashboard/courses => ['dashboard', 'courses']
-  // if location path has arr[0] ('dashboard') then links is active
+  // if path (from props) includes parent arr[0] = 'dashboard' then link is active
   // otherwise inactive
   const isActive = (): boolean => {
     const locationPath = location.pathname;

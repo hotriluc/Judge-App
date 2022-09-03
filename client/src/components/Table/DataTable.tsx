@@ -60,7 +60,7 @@ const DataTable = <T extends MinimumData, K extends keyof T>({
   ));
 
   return (
-    <Table>
+    <Table highlightOnHover>
       <thead>
         <tr>
           {cols}
