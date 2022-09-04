@@ -27,6 +27,21 @@ export const getCourses = () => {
   };
 };
 
+export const getCourse = (id: string) => {
+  config.headers = { ...authHeader() };
+
+  return async (dispatch: AppDispatch) => {
+    axios
+      .get(`/api/v1/courses/${id}`, config)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(courseActions.setCourse(res.data));
+        }
+      })
+      .catch((err) => alert(err));
+  };
+};
+
 export const deleteCourse = (id: string) => {
   config.headers = { ...authHeader() };
 
