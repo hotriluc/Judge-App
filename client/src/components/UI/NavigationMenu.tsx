@@ -8,13 +8,14 @@ import {
 } from '@tabler/icons';
 import React from 'react';
 import { useNavigate } from 'react-router-dom';
-import { useAppDispatch } from '../../hooks/app-hooks';
+import { useAppDispatch, useAppSelector } from '../../hooks/app-hooks';
 import { stopSession } from '../../services/AuthService';
 import UserButton from './UserButton';
 
 const NavigationMenu = () => {
   const dispatch = useAppDispatch();
   const navigate = useNavigate();
+  const currentUser = useAppSelector((state) => state.auth.user);
 
   const onClickLogoutHandler = () => {
     dispatch(stopSession());
@@ -24,7 +25,11 @@ const NavigationMenu = () => {
   return (
     <Menu shadow="md" width={270}>
       <Menu.Target>
-        <UserButton image="" name="Luc Ho" email="example@example.com" />
+        <UserButton
+          image=""
+          name={`${currentUser.first_name} ${currentUser.last_name}`}
+          email={currentUser.email}
+        />
       </Menu.Target>
 
       <Menu.Dropdown>
