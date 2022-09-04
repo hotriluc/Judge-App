@@ -27,6 +27,11 @@ interface DataTableProps<T extends MinimumData, K extends keyof T> {
 }
 
 const useStyles = createStyles(() => ({
+  wrapper: {
+    borderRadius: '7px',
+    border: '1px solid rgba(233, 236, 239)',
+    boxShadow: '0 2rem 8rem rgba(0,0,0, .1)',
+  },
   actions: {
     width: '20%',
   },
@@ -60,15 +65,17 @@ const DataTable = <T extends MinimumData, K extends keyof T>({
   ));
 
   return (
-    <Table highlightOnHover>
-      <thead>
-        <tr>
-          {cols}
-          {displayActions && <th className={classes.actions}>Actions</th>}
-        </tr>
-      </thead>
-      <tbody>{rows}</tbody>
-    </Table>
+    <div className={classes.wrapper}>
+      <Table highlightOnHover horizontalSpacing={30} verticalSpacing={'lg'}>
+        <thead>
+          <tr>
+            {cols}
+            {displayActions && <th className={classes.actions}>Actions</th>}
+          </tr>
+        </thead>
+        <tbody>{rows}</tbody>
+      </Table>
+    </div>
   );
 };
 

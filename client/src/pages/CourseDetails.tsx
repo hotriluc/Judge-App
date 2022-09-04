@@ -7,14 +7,19 @@ import IUser from '../interfaces/User';
 import { getCourse } from '../services/CoursesService';
 
 const useStyle = createStyles((theme) => ({
+  wrapper: {
+    '& h2': {
+      marginBottom: theme.spacing.xs,
+    },
+  },
   stack: {
     flexBasis: '50%',
     marginTop: theme.spacing.xl,
   },
+  description: {},
   tasks: {
     flexGrow: 1,
     marginTop: theme.spacing.xl,
-    backgroundColor: 'green',
     height: '100vh',
   },
 
@@ -34,57 +39,39 @@ const studentsColumns: ColumnDefinitionType<IUser, keyof IUser>[] = [
 const dummyStudents: Array<IUser> = [
   {
     id: '1',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
+    first_name: 'Test',
+    last_name: 'Test',
+    email: 'test@test.com',
   },
   {
     id: '2',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
+    first_name: 'Test',
+    last_name: 'Test',
+    email: 'test@test.com',
   },
   {
     id: '3',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
+    first_name: 'Test',
+    last_name: 'Test',
+    email: 'test@test.com',
   },
   {
     id: '4',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
+    first_name: 'Test',
+    last_name: 'Test',
+    email: 'test@test.com',
   },
   {
     id: '5',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
+    first_name: 'Test',
+    last_name: 'Test',
+    email: 'test@test.com',
   },
   {
     id: '6',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
-  },
-  {
-    id: '7',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
-  },
-  {
-    id: '8',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
-  },
-  {
-    id: '9',
-    first_name: 'luc',
-    last_name: 'ho',
-    email: 'test@test',
+    first_name: 'Test',
+    last_name: 'Test',
+    email: 'test@test.com',
   },
 ];
 
@@ -109,13 +96,12 @@ const CourseDetails = () => {
   };
 
   return (
-    <Group align={'flex-start'} spacing="xl">
-      <Stack className={classes.stack}>
+    <Group align={'flex-start'} spacing={20} className={classes.wrapper}>
+      <Stack className={classes.stack} spacing={40}>
         <h1>{course.title}</h1>
         <div className={classes.courseImg}>course image</div>
-        <div>
+        <div className={classes.description}>
           <h2>Description</h2>
-          <p>{course.description ?? '-'}</p>
           <p>
             Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit,
             neque. Pariatur error consectetur tempore iste, temporibus nemo

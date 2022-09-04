@@ -39,7 +39,7 @@ const CoursesTable = () => {
   };
 
   return (
-    <div>
+    <>
       {/* <button onClick={onClickPrevPageHandler}>Prev</button>
       <button onClick={onClickNextPageHandler}>Next</button> */}
       <DataTable
@@ -49,7 +49,7 @@ const CoursesTable = () => {
         removeFn={removeCourse}
         viewFn={viewCourse}
       />
-    </div>
+    </>
   );
 };
 
