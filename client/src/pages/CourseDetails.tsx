@@ -27,7 +27,6 @@ const useStyle = createStyles((theme) => ({
 }));
 
 const studentsColumns: ColumnDefinitionType<IUser, keyof IUser>[] = [
-  { key: 'id', header: 'Id' },
   { key: 'email', header: 'Email' },
   { key: 'last_name', header: 'Last name' },
 ];
