@@ -1,5 +1,6 @@
 class CoursesController < ApplicationController
   before_action :set_course, only: %i[show update destroy]
+  before_action :owner?, only: %i[show update destroy]
 
   # GET /courses
   def index
@@ -44,5 +45,9 @@ class CoursesController < ApplicationController
   def set_course
     @course = Course.find_by(id: params['id'])
     render json: { error: 'No such course exists' }, status: 400 if @course.nil?
+  end
+
+  def owner?
+    render json: { error: 'No permission' }, status: 401 unless @course.owner_id == current_user.id
   end
 end
