@@ -10,6 +10,8 @@ const useStyles = createStyles((theme) => ({
     backgroundColor:
       theme.colorScheme === 'dark' ? theme.colors.dark[6] : theme.white,
     paddingBottom: 0,
+    position: 'sticky',
+    top: 0,
   },
 
   header: {

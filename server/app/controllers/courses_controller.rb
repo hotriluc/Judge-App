@@ -48,6 +48,6 @@ class CoursesController < ApplicationController
   end
 
   def owner?
-    render json: { error: 'No permission' }, status: 401 unless @course.owner_id == current_user.id
+    render json: { error: 'You don\'t have permission to this course' }, status: 401 unless @course.owner_id == current_user.id
   end
 end
