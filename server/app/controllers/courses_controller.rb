@@ -1,5 +1,5 @@
 class CoursesController < ApplicationController
-  before_action :set_course, only: %i[show update destroy]
+  before_action :set_course, only: %i[show update destroy remove_student]
   before_action :owner?, only: %i[show update destroy]
 
   # GET /courses
@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/:id
   def show
-    render json: {course: @course, students: @course.users}
+    render json: { course: @course, students: @course.users }
   end
 
   # POST /courses
@@ -36,6 +36,13 @@ class CoursesController < ApplicationController
     render json: { message: 'success' }
   end
 
+  def remove_student
+    @course.users.delete(params['student_id'])
+    render json: { message: 'student removed successfully' }
+  rescue ActiveRecord::RecordNotFound
+    render json: { error: 'No such student exists' }
+  end
+
   private
 
   def course_params
@@ -48,6 +55,9 @@ class CoursesController < ApplicationController
   end
 
   def owner?
-    render json: { error: 'You don\'t have permission to this course' }, status: 401 unless @course.owner_id == current_user.id
+    unless @course.owner_id == current_user.id
+      render json: { error: 'You don\'t have permission to this course' },
+             status: 401
+    end
   end
 end
