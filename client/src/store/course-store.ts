@@ -6,7 +6,7 @@ const initialState: {
   ownedCourses: Array<ICourse>;
   isChanged: boolean;
 } = {
-  course: { id: '', title: '', description: '', owner_id: '' },
+  course: { id: '', title: '', description: '', owner_id: '', students: [] },
   ownedCourses: [],
   isChanged: false,
 };

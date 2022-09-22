@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/:id
   def show
-    render json: @course
+    render json: {course: @course, students: @course.users}
   end
 
   # POST /courses

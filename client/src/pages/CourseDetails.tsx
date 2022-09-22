@@ -36,45 +36,6 @@ const studentsColumns: ColumnDefinitionType<IUser, keyof IUser>[] = [
   { key: 'last_name', header: 'Last name' },
 ];
 
-const dummyStudents: Array<IUser> = [
-  {
-    id: '1',
-    first_name: 'Test',
-    last_name: 'Test',
-    email: 'test@test.com',
-  },
-  {
-    id: '2',
-    first_name: 'Test',
-    last_name: 'Test',
-    email: 'test@test.com',
-  },
-  {
-    id: '3',
-    first_name: 'Test',
-    last_name: 'Test',
-    email: 'test@test.com',
-  },
-  {
-    id: '4',
-    first_name: 'Test',
-    last_name: 'Test',
-    email: 'test@test.com',
-  },
-  {
-    id: '5',
-    first_name: 'Test',
-    last_name: 'Test',
-    email: 'test@test.com',
-  },
-  {
-    id: '6',
-    first_name: 'Test',
-    last_name: 'Test',
-    email: 'test@test.com',
-  },
-];
-
 const CourseDetails = () => {
   const { id } = useParams();
   const { classes } = useStyle();
@@ -102,17 +63,12 @@ const CourseDetails = () => {
         <div className={classes.courseImg}>course image</div>
         <div className={classes.description}>
           <h2>Description</h2>
-          <p>
-            Lorem ipsum dolor sit amet consectetur, adipisicing elit. Sit,
-            neque. Pariatur error consectetur tempore iste, temporibus nemo
-            necessitatibus reiciendis nam possimus repellendus consequatur velit
-            ratione sapiente odit quidem voluptatum fugiat?
-          </p>
+          <p>{course.description || ''}</p>
         </div>
         <div className={classes.students}>
           <h2>Enrolled students</h2>
           <DataTable
-            data={dummyStudents}
+            data={course.students}
             columns={studentsColumns}
             viewFn={viewUser}
             removeFn={removeUser}
@@ -124,7 +80,7 @@ const CourseDetails = () => {
       <div className={classes.tasks}>
         <h2>Tasks</h2>
         <DataTable
-          data={dummyStudents}
+          data={course.students}
           columns={studentsColumns}
           viewFn={() => {
             console.log('b');
