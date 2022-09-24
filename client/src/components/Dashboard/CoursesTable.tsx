@@ -15,19 +15,22 @@ const CoursesTable = () => {
   const navigate = useNavigate();
   // const [newPage, setNewPage] = useState(0);
   const courses = useAppSelector((state) => state.course.ownedCourses);
-  const isChanged = useAppSelector((state) => state.course.isChanged);
+  const needsUpdate = useAppSelector((state) => state.ui.needsUpdate);
 
   // On first mount fetch courses
   useEffect(() => {
     dispatch(getCourses());
   }, []);
 
-  // On state changes refetch
+  /**
+   * on UPDATE and DELETE
+   * refetch up to date information
+   */
   useEffect(() => {
-    if (isChanged) {
+    if (needsUpdate) {
       dispatch(getCourses());
     }
-  }, [isChanged]);
+  }, [needsUpdate]);
 
   const removeCourse = (id: string) => {
     dispatch(deleteCourse(id));

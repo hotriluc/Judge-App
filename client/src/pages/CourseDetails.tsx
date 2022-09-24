@@ -41,13 +41,24 @@ const CourseDetails = () => {
   const { classes } = useStyle();
   const dispatch = useAppDispatch();
   const course = useAppSelector((state) => state.course.course);
-  const isChanged = useAppSelector((state) => state.course.isChanged);
+  const needsUpdate = useAppSelector((state) => state.ui.needsUpdate);
 
   useEffect(() => {
     if (id) {
       dispatch(getCourse(id));
     }
-  }, [id, isChanged]);
+  }, [id]);
+
+  /**
+   * on UPDATE and DELETE
+   * refetch up to date information
+   */
+  useEffect(() => {
+    // to avoid double request
+    if (needsUpdate && id) {
+      dispatch(getCourse(id));
+    }
+  }, [needsUpdate]);
 
   const viewUser = (id: string) => {
     console.log(id);
