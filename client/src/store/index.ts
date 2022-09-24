@@ -1,11 +1,13 @@
 import { configureStore } from '@reduxjs/toolkit';
 import authReducer from './auth-store';
 import courseReducer from './course-store';
+import uiReducer from './ui-store';
 
 export const store = configureStore({
   reducer: {
     auth: authReducer,
     course: courseReducer,
+    ui: uiReducer,
   },
 });
 

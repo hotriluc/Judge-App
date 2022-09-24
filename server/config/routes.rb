@@ -5,7 +5,13 @@ Rails.application.routes.draw do
   # root "articles#index"
   scope 'api/v1' do
     resources :users
-    resources :courses
+    resources :courses do
+      member do
+        # find how to DO IT
+        delete 'remove_student'
+        post 'add_student'
+      end
+    end
 
     scope '/auth' do
       post '/login', to: 'auth#create'
