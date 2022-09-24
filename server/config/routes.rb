@@ -9,6 +9,7 @@ Rails.application.routes.draw do
       member do
         # find how to DO IT
         delete 'remove_student'
+        post 'add_student'
       end
     end
 

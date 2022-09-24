@@ -10,7 +10,7 @@ class CoursesController < ApplicationController
 
   # GET /courses/:id
   def show
-    render json: { course: @course, students: @course.users }
+    render json: { data: @course, students: @course.users }
   end
 
   # POST /courses
@@ -37,6 +37,7 @@ class CoursesController < ApplicationController
   end
 
   def remove_student
+    # instead of using params send id in request body
     @course.users.delete(params['student_id'])
     render json: { message: 'student removed successfully' }
   rescue ActiveRecord::RecordNotFound

@@ -59,11 +59,11 @@ const CourseDetails = () => {
   return (
     <Group align={'flex-start'} spacing={20} className={classes.wrapper}>
       <Stack className={classes.stack} spacing={40}>
-        <h1>{course.title}</h1>
+        <h1>{course.data.title}</h1>
         <div className={classes.courseImg}>course image</div>
         <div className={classes.description}>
           <h2>Description</h2>
-          <p>{course.description || ''}</p>
+          <p>{course.data.description}</p>
         </div>
         <div className={classes.students}>
           <h2>Enrolled students</h2>
