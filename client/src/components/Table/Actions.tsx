@@ -28,10 +28,10 @@ const Actions = ({ id, viewFn, removeFn }: IActions): JSX.Element => {
   return (
     <Group>
       <Button size={'xs'} variant="outline" onClick={onClickViewButton}>
-        <IconEye className={classes.link} />
+        <IconEye className={classes.link} size={18} />
       </Button>
       <Button size={'xs'} variant="outline" onClick={onClickRemoveButton}>
-        <IconTrash className={classes.link} />
+        <IconTrash className={classes.link} size={18} />
       </Button>
     </Group>
   );

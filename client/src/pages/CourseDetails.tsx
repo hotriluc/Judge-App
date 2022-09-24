@@ -1,4 +1,5 @@
-import { createStyles, Group, Stack } from '@mantine/core';
+import { Button, createStyles, Group, Stack, Tooltip } from '@mantine/core';
+import { IconUserPlus } from '@tabler/icons';
 import React, { useEffect } from 'react';
 import { useParams } from 'react-router-dom';
 import DataTable, { ColumnDefinitionType } from '../components/Table/DataTable';
@@ -9,7 +10,7 @@ import { getCourse, removeStudent } from '../services/CoursesService';
 const useStyle = createStyles((theme) => ({
   wrapper: {
     '& h2': {
-      marginBottom: theme.spacing.xs,
+      marginBottom: 15,
     },
   },
   stack: {
@@ -22,7 +23,6 @@ const useStyle = createStyles((theme) => ({
     marginTop: theme.spacing.xl,
     height: '100vh',
   },
-
   courseImg: {
     height: 200,
     width: 200,
@@ -80,7 +80,18 @@ const CourseDetails = () => {
           <p>{course.data.description}</p>
         </div>
         <div className={classes.students}>
-          <h2>Enrolled students</h2>
+          <Group>
+            <h2>Enrolled students</h2>
+            <Tooltip label="Invite a student">
+              <Button
+                size={'xs'}
+                variant="outline"
+                style={{ marginBottom: 15 }}
+              >
+                <IconUserPlus size={18} />
+              </Button>
+            </Tooltip>
+          </Group>
           <DataTable
             data={course.students}
             columns={studentsColumns}
