@@ -28,6 +28,7 @@ const CourseSlice = createSlice({
     ) => {
       state.course.data = action.payload.data;
       state.course.students = action.payload.students;
+      state.isChanged = false;
     },
     setOwnedCourses: (state, action) => {
       state.ownedCourses = action.payload;
@@ -36,6 +37,10 @@ const CourseSlice = createSlice({
     deleteCourse: (state, action: PayloadAction<string>) => {
       console.log(action.payload, 'successfully removed');
       // re-fetch after delete the course
+      state.isChanged = true;
+    },
+    removeStudent: (state, action) => {
+      console.log(action.payload, 'student successfully removed');
       state.isChanged = true;
     },
   },

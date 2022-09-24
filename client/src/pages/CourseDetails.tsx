@@ -4,7 +4,7 @@ import { useParams } from 'react-router-dom';
 import DataTable, { ColumnDefinitionType } from '../components/Table/DataTable';
 import { useAppDispatch, useAppSelector } from '../hooks/app-hooks';
 import IUser from '../interfaces/User';
-import { getCourse } from '../services/CoursesService';
+import { getCourse, removeStudent } from '../services/CoursesService';
 
 const useStyle = createStyles((theme) => ({
   wrapper: {
@@ -41,19 +41,22 @@ const CourseDetails = () => {
   const { classes } = useStyle();
   const dispatch = useAppDispatch();
   const course = useAppSelector((state) => state.course.course);
+  const isChanged = useAppSelector((state) => state.course.isChanged);
 
   useEffect(() => {
     if (id) {
       dispatch(getCourse(id));
     }
-  }, [id]);
+  }, [id, isChanged]);
 
   const viewUser = (id: string) => {
     console.log(id);
   };
 
-  const removeUser = (id: string) => {
-    console.log(id);
+  const removeUser = (studentId: string) => {
+    if (id) {
+      dispatch(removeStudent(id, studentId));
+    }
   };
 
   return (

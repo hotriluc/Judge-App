@@ -6,6 +6,7 @@ import { courseActions } from '../store/course-store';
 
 const config = {
   headers: {},
+  data: {},
 };
 
 /* Auto-login if token stored in the browser
@@ -51,6 +52,22 @@ export const deleteCourse = (id: string) => {
       .then((res) => {
         if (res.status === 200) {
           dispatch(courseActions.deleteCourse(id));
+        }
+      })
+      .catch((err) => alert(err));
+  };
+};
+
+export const removeStudent = (courseId: string, studentId: string) => {
+  config.headers = { ...authHeader() };
+  config.data = { student_id: studentId };
+
+  return async (dispatch: AppDispatch) => {
+    axios
+      .delete(`/api/v1/courses/${courseId}/remove_student`, config)
+      .then((res) => {
+        if (res.status === 200) {
+          dispatch(courseActions.removeStudent(studentId));
         }
       })
       .catch((err) => alert(err));
